@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: config
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/zhangliang1024/config-repo
+          username: zhangliang1024
+          password: ZL13453003986
+          basedir: D:/User/Company/example/config/conf
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
