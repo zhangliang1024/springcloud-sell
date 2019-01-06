@@ -7,6 +7,17 @@ spring:
         enabled: true
         service-id: config  # config配置服务名称
       profile: dev
+    stream:
+      bindings:
+        myMessage:
+          group: order  # spring-cloud-stream 设置分组，防止起多份实例，都接收到消息
+
+  rabbitmq:
+    host: 111.231.202.87
+    port: 5672
+    username: guest
+    password: guest
+
 eureka:
   client:
     service-url:

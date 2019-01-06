@@ -5,7 +5,9 @@ import com.example.product.common.DecreaseStockInput;
 import com.example.product.common.ProductInfoOutput;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -21,6 +23,7 @@ import java.util.List;
  */
 @RestController
 @Slf4j
+@RefreshScope
 public class ClientController {
 
 
@@ -33,6 +36,8 @@ public class ClientController {
     @Autowired
     private ProductClient productClient;
 
+    @Value("${env}")
+    private String env;
 
     @GetMapping("/getProductMsg")
     public String getProductMsg(){
@@ -53,9 +58,9 @@ public class ClientController {
         //log.info("response={}",response);
 
         //4.使用 feign 来实现服务之间的调用
-        String response = productClient.getProductMsg();
-        log.info("response={}",response);
-        return response;
+        //String response = productClient.getProductMsg();
+        //log.info("response={}",response);
+        return env;
     }
 
 

@@ -7,8 +7,15 @@ spring:
         enabled: true
         service-id: config  # config配置服务名称
       profile: dev
+  rabbitmq:
+    host: 111.231.202.87
+    port: 5672
+    username: guest
+    password: guest
+
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
+
 
