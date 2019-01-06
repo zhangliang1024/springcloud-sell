@@ -10,7 +10,10 @@ spring:
     stream:
       bindings:
         myMessage:
-          group: order  # spring-cloud-stream 设置分组，防止起多份实例，都接收到消息
+          group: order
+        # spring-cloud-stream 设置分组，防止起多份实例，都接收到消息; 只要是在一个组中，只有一个实例会消费消息
+          content-type: application/json
+          # 消息队列以 josn格式保存 可以在管理后台中查看
 
   rabbitmq:
     host: 111.231.202.87

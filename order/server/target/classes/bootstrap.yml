@@ -7,6 +7,12 @@ spring:
         enabled: true
         service-id: config  # config配置服务名称
       profile: dev
+    stream:
+      bindings:
+        myMessage:
+          group: order
+        # spring-cloud-stream 设置分组，防止起多份实例，都接收到消息; 只要是在一个组中，只有一个实例会消费消息
+
   rabbitmq:
     host: 111.231.202.87
     port: 5672
@@ -17,5 +23,4 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
-
 

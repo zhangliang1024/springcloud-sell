@@ -1,9 +1,11 @@
 package com.example.server.message;
 
+import com.example.server.dto.OrderDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Component;
 
 /**
@@ -23,5 +25,34 @@ public class StreamReceiver {
         log.info("StreamReceiver: {}",message);
     }
 
+    /**
+     * 接收 对象类型
+     * @param message
+     */
+    @StreamListener(StreamClient.INPUT)
+    public void processObj(OrderDTO message){
+        log.info("Obj StreamReceiver: {}",message);
+    }
+
+
+    /**
+     * 接收 对象类型, 并返回消息
+     * @param message
+     */
+    @StreamListener(StreamClient.INPUT)
+    @SendTo(StreamClient.INPUT2)
+    public String processObjTo(OrderDTO message){
+        log.info("Obj StreamReceiver: {}",message);
+        return "received message";
+    }
+
+    /**
+     * 接收 上面 SendTo的消息
+     * @param message
+     */
+    @StreamListener(StreamClient.INPUT2)
+    public void process2(String message){
+        log.info("StreamReceiver2: {}",message);
+    }
 
 }
